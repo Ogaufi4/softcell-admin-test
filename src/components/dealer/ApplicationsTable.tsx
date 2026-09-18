@@ -82,10 +82,7 @@ export default function ApplicationsTable() {
           <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
             {items.length === 0 && (
               <TableRow>
-                <TableCell
-                  className="py-8 text-center text-sm text-gray-500 dark:text-gray-400"
-                  colSpan={8}
-                >
+                <TableCell className="py-8 text-center text-sm text-gray-500 dark:text-gray-400">
                   {t("noResults")}
                 </TableCell>
               </TableRow>

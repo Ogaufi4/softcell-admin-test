@@ -22,7 +22,7 @@ export default function ReportsExports() {
   const tDealer = useTranslations("dealer");
 
   const [reportType, setReportType] = useState("distribution");
-  const [period, setPeriod] = useState("thisMonth");
+  const [period, setPeriod] = useState("thisYear");
 
   const reportTypeOptions = [
     { value: "distribution", label: t("reportTypes.distribution") },
@@ -36,8 +36,15 @@ export default function ReportsExports() {
     { value: "thisYear", label: t("periods.thisYear") },
   ];
 
+  const visibleMonths = useMemo(() => {
+    if (period === "thisMonth") return monthlyDistribution.slice(-1);
+    if (period === "lastMonth") return monthlyDistribution.slice(-2, -1);
+    if (period === "thisQuarter") return monthlyDistribution.slice(-3);
+    return monthlyDistribution;
+  }, [period]);
+
   const summary = useMemo(() => {
-    const totalDistributed = monthlyDistribution.reduce(
+    const totalDistributed = visibleMonths.reduce(
       (sum, m) => sum + m.distributed,
       0,
     );
@@ -46,12 +53,12 @@ export default function ReportsExports() {
       .filter((p) => p.status === "received")
       .reduce((sum, p) => sum + p.amount, 0);
     return { totalDistributed, totalTransactions, totalCollected };
-  }, []);
+  }, [visibleMonths]);
 
   const exportCsv = () => {
     const rows: string[][] =
       reportType === "distribution"
-        ? monthlyDistribution.map((m) => [m.month, String(m.distributed)])
+        ? visibleMonths.map((m) => [m.month, String(m.distributed)])
         : reportType === "payments"
           ? payments.map((p) => [p.reference, p.subDealer, p.method, String(p.amount), p.dueDate, p.status])
           : transactions.map((tr) => [
@@ -106,7 +113,7 @@ export default function ReportsExports() {
             <Label>{t("periodLabel")}</Label>
             <Select
               options={periodOptions}
-              defaultValue="thisMonth"
+              defaultValue="thisYear"
               onChange={(value) => setPeriod(value)}
             />
           </div>
@@ -170,7 +177,7 @@ export default function ReportsExports() {
             </TableHeader>
             <TableBody className="divide-y divide-gray-100 dark:divide-gray-800">
               {reportType === "distribution" &&
-                monthlyDistribution.map((m) => (
+                visibleMonths.map((m) => (
                   <TableRow key={m.month}>
                     <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                       UI-{m.month.toUpperCase()}
