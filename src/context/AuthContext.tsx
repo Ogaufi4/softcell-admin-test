@@ -4,47 +4,60 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const STORAGE_KEY = "softcell_dealer_auth";
 
-export const AUTH_CREDENTIALS = {
-  email: "admin@softcell.com",
-  password: "adminpass",
+export type AuthRole = "dealer" | "subdealer";
+
+export const AUTH_CREDENTIALS: Record<AuthRole, { email: string; password: string }> = {
+  dealer: { email: "admin@softcell.com", password: "adminpass" },
+  subdealer: { email: "subdealer@softcell.com", password: "subdealerpass" },
 };
 
 interface AuthContextValue {
   isAuthenticated: boolean;
   isInitialized: boolean;
-  login: (email: string, password: string) => boolean;
+  role: AuthRole | null;
+  login: (email: string, password: string) => AuthRole | null;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+function readRole(raw: string | null): AuthRole | null {
+  if (raw === "subdealer") return "subdealer";
+  if (raw === "dealer" || raw === "true") return "dealer";
+  return null;
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [role, setRole] = useState<AuthRole | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
+    let raw: string | null = null;
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      setIsAuthenticated(stored === "true");
+      raw = localStorage.getItem(STORAGE_KEY);
     } catch {
-      setIsAuthenticated(false);
+      // ignore storage failures
     }
+    setRole(readRole(raw));
     setIsInitialized(true);
   }, []);
 
-  const login = (email: string, password: string) => {
-    const valid =
-      email.trim().toLowerCase() === AUTH_CREDENTIALS.email &&
-      password === AUTH_CREDENTIALS.password;
-    if (valid) {
+  const login = (email: string, password: string): AuthRole | null => {
+    const normalized = email.trim().toLowerCase();
+    const role = (Object.keys(AUTH_CREDENTIALS) as AuthRole[]).find(
+      (anyRole) =>
+        AUTH_CREDENTIALS[anyRole].email === normalized &&
+        AUTH_CREDENTIALS[anyRole].password === password,
+    );
+    if (role) {
       try {
-        localStorage.setItem(STORAGE_KEY, "true");
+        localStorage.setItem(STORAGE_KEY, role);
       } catch {
         // ignore storage failures
       }
-      setIsAuthenticated(true);
+      setRole(role);
     }
-    return valid;
+    return role ?? null;
   };
 
   const logout = () => {
@@ -53,12 +66,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // ignore storage failures
     }
-    setIsAuthenticated(false);
+    setRole(null);
   };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, isInitialized, login, logout }}
+      value={{
+        isAuthenticated: role !== null,
+        isInitialized,
+        role,
+        login,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

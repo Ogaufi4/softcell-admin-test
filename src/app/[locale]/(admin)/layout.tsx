@@ -13,17 +13,19 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { isAuthenticated, isInitialized } = useAuth();
+  const { isAuthenticated, isInitialized, role } = useAuth();
   const router = useRouter();
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
 
   useEffect(() => {
-    if (isInitialized && !isAuthenticated) {
-      router.replace("/signin");
+    if (isInitialized) {
+      if (!isAuthenticated || role === "subdealer") {
+        router.replace(role === "subdealer" ? "/portal" : "/signin");
+      }
     }
-  }, [isAuthenticated, isInitialized, router]);
+  }, [isAuthenticated, isInitialized, role, router]);
 
-  if (isInitialized && !isAuthenticated) {
+  if (isInitialized && (!isAuthenticated || role === "subdealer")) {
     return null;
   }
 

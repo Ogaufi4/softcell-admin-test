@@ -10,6 +10,31 @@ export type ApplicationStatus = "pending" | "approved" | "rejected";
 
 export type PaymentStatus = "received" | "due" | "overdue";
 
+export type RestockStatus = "pending" | "approved" | "rejected" | "fulfilled";
+
+export type RestockSource = "network" | "subDealer";
+
+export interface VirtualStock {
+  id: string;
+  network: string;
+  credit: number;
+  used: number;
+  available: number;
+  threshold: number;
+}
+
+export interface RestockOrder {
+  id: string;
+  reference: string;
+  source: RestockSource;
+  origin: string;
+  product: string;
+  units: number;
+  amount: number;
+  date: string;
+  status: RestockStatus;
+}
+
 export interface SubDealer {
   id: string;
   name: string;
@@ -867,3 +892,158 @@ export const traceBranches: TraceTreeBranch[] = [
 export const dealerEvents: TraceEvent[] = traceBranches.flatMap((branch) =>
   branch.events.map((ev) => ({ ...ev, product: branch.product })),
 );
+
+export const dealerVirtualStock: VirtualStock[] = [
+  {
+    id: "vs-001",
+    network: "Orange",
+    credit: 150000,
+    used: 94000,
+    available: 56000,
+    threshold: 30000,
+  },
+  {
+    id: "vs-002",
+    network: "Mascom",
+    credit: 120000,
+    used: 82000,
+    available: 38000,
+    threshold: 25000,
+  },
+  {
+    id: "vs-003",
+    network: "BTC",
+    credit: 90000,
+    used: 61000,
+    available: 29000,
+    threshold: 20000,
+  },
+  {
+    id: "vs-004",
+    network: "Prange",
+    credit: 50000,
+    used: 21000,
+    available: 29000,
+    threshold: 12000,
+  },
+  {
+    id: "vs-005",
+    network: "CashPlus",
+    credit: 70000,
+    used: 48000,
+    available: 22000,
+    threshold: 15000,
+  },
+];
+
+export const subDealerVirtualStock: VirtualStock[] = [
+  {
+    id: "svs-001",
+    network: "Orange",
+    credit: 40000,
+    used: 28600,
+    available: 11400,
+    threshold: 8000,
+  },
+  {
+    id: "svs-002",
+    network: "Mascom",
+    credit: 32000,
+    used: 19400,
+    available: 12600,
+    threshold: 6000,
+  },
+  {
+    id: "svs-003",
+    network: "BTC",
+    credit: 24000,
+    used: 15800,
+    available: 8200,
+    threshold: 5000,
+  },
+  {
+    id: "svs-004",
+    network: "Prange",
+    credit: 12000,
+    used: 4100,
+    available: 7900,
+    threshold: 3000,
+  },
+  {
+    id: "svs-005",
+    network: "CashPlus",
+    credit: 18000,
+    used: 12300,
+    available: 5700,
+    threshold: 4000,
+  },
+];
+
+export const dealerRestockOrders: RestockOrder[] = [
+  {
+    id: "rr-001",
+    reference: "RSK-2026-0201",
+    source: "network",
+    origin: "Orange",
+    product: "Orange Airtime",
+    units: 8000,
+    amount: 1200000,
+    date: "2026-09-16",
+    status: "fulfilled",
+  },
+  {
+    id: "rr-002",
+    reference: "RSK-2026-0202",
+    source: "network",
+    origin: "Mascom",
+    product: "Smega Airtime",
+    units: 5000,
+    amount: 750000,
+    date: "2026-09-15",
+    status: "fulfilled",
+  },
+  {
+    id: "rr-003",
+    reference: "RSK-2026-0203",
+    source: "network",
+    origin: "BTC",
+    product: "MyZaka Wallet",
+    units: 3000,
+    amount: 450000,
+    date: "2026-09-14",
+    status: "pending",
+  },
+  {
+    id: "rr-004",
+    reference: "RSK-2026-0204",
+    source: "subDealer",
+    origin: "Bright Retail & Co",
+    product: "Smega Airtime",
+    units: 1500,
+    amount: 225000,
+    date: "2026-09-16",
+    status: "pending",
+  },
+  {
+    id: "rr-005",
+    reference: "RSK-2026-0205",
+    source: "subDealer",
+    origin: "Metro Telecom Hub",
+    product: "Orange Airtime",
+    units: 2000,
+    amount: 300000,
+    date: "2026-09-15",
+    status: "approved",
+  },
+  {
+    id: "rr-006",
+    reference: "RSK-2026-0206",
+    source: "subDealer",
+    origin: "South City Network",
+    product: "CashPlus",
+    units: 900,
+    amount: 135000,
+    date: "2026-09-13",
+    status: "rejected",
+  },
+];

@@ -21,9 +21,11 @@ export default function SignInForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const ok = login(email, password);
-    if (ok) {
+    const role = login(email, password);
+    if (role === "dealer") {
       router.replace("/");
+    } else if (role === "subdealer") {
+      router.replace("/portal");
     } else {
       setError("Invalid email or password. Use the demo credentials below.");
     }
@@ -165,6 +167,14 @@ export default function SignInForm() {
                   /{" "}
                   <span className="font-semibold text-gray-700 dark:text-gray-300">
                     adminpass
+                  </span>
+                  {" "}·{" "}
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    subdealer@softcell.com
+                  </span>{" "}
+                  /{" "}
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    subdealerpass
                   </span>
                 </p>
               </div>

@@ -7,8 +7,10 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSidebar } from "../context/SidebarContext";
 import {
+  BoltIcon,
   BoxCubeIcon,
   ChevronDownIcon,
+  DollarLineIcon,
   GridIcon,
   GroupIcon,
   HorizontaLDots,
@@ -69,6 +71,16 @@ const othersItems: NavItem[] = [
     icon: <BoxCubeIcon />,
     key: "stock",
     path: "/stock",
+  },
+  {
+    icon: <BoltIcon />,
+    key: "restocking",
+    path: "/restocking",
+  },
+  {
+    icon: <DollarLineIcon />,
+    key: "virtualStock",
+    path: "/virtual-stock",
   },
   {
     icon: <TableIcon />,

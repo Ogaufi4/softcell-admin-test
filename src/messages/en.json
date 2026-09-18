@@ -27,6 +27,8 @@
       "register": "Register",
       "applications": "Applications",
       "stock": "Stock",
+      "restocking": "Restocking",
+      "virtualStock": "Virtual Stock",
       "reportsExports": "Reports & Exports",
       "payments": "Payments",
       "tracing": "Stock Tracing",
@@ -1093,6 +1095,56 @@
         "totalCollected": "Total Collected"
       }
     },
+    "virtualStock": {
+      "title": "Virtual Stock",
+      "subtitle": "Your credit/float with each network",
+      "totalCredit": "Total Credit",
+      "totalAvailable": "Total Available",
+      "table": {
+        "network": "Network",
+        "credit": "Credit",
+        "used": "Used",
+        "available": "Available",
+        "status": "Status"
+      },
+      "statuses": {
+        "healthy": "Healthy",
+        "low": "Low",
+        "exhausted": "Exhausted"
+      }
+    },
+    "restocking": {
+      "formTitle": "Restock From Network",
+      "formSubtitle": "Order fresh airtime & mobile money stock from a network",
+      "product": "Product",
+      "units": "Units",
+      "unitsPlaceholder": "Enter number of units",
+      "estimatedAmount": "Estimated Amount",
+      "submit": "Place Restock Order",
+      "successMessage": "Restock order placed. The network (dealer) will fulfil it shortly.",
+      "networkOrdersTitle": "Network Restock Orders",
+      "subDealerRequestsTitle": "Sub-Dealer Restock Requests",
+      "table": {
+        "reference": "Reference",
+        "origin": "Sub-Dealer",
+        "product": "Product",
+        "units": "Units",
+        "amount": "Amount",
+        "date": "Date",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "statuses": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "fulfilled": "Fulfilled",
+        "rejected": "Rejected"
+      },
+      "actions": {
+        "approve": "Approve",
+        "reject": "Reject"
+      }
+    },
     "payments": {
       "title": "Payments",
       "subtitle": "Money collected from sub-dealers",
@@ -1173,6 +1225,67 @@
         }
       },
       "empty": "No tracing events match your filters."
+    }
+  },
+  "subdealer": {
+    "brand": "SoftCell Sub-Dealer Portal",
+    "signOut": "Sign out",
+    "nav": {
+      "overview": "Overview",
+      "virtualStock": "Virtual Stock",
+      "restock": "Restock"
+    },
+    "overview": {
+      "metrics": {
+        "virtualCredit": "Virtual Credit",
+        "available": "Available",
+        "pendingRequests": "Pending Requests",
+        "approvedRequests": "Fulfilled Requests"
+      },
+      "placeRestock": "Request Restock"
+    },
+    "virtualStock": {
+      "title": "Virtual Stock",
+      "subtitle": "Your credit/float with each network",
+      "totalCredit": "Total Credit",
+      "totalAvailable": "Total Available",
+      "table": {
+        "network": "Network",
+        "credit": "Credit",
+        "used": "Used",
+        "available": "Available",
+        "status": "Status"
+      },
+      "statuses": {
+        "healthy": "Healthy",
+        "low": "Low",
+        "exhausted": "Exhausted"
+      }
+    },
+    "restock": {
+      "formTitle": "Request Restock",
+      "formSubtitle": "Request fresh airtime & mobile money stock from the dealer",
+      "product": "Product",
+      "units": "Units",
+      "unitsPlaceholder": "Enter number of units",
+      "estimatedAmount": "Estimated Amount",
+      "submit": "Submit Restock Request",
+      "successMessage": "Restock request sent to your dealer. It will be reviewed shortly.",
+      "historyTitle": "My Restock Requests",
+      "table": {
+        "reference": "Reference",
+        "product": "Product",
+        "units": "Units",
+        "amount": "Amount",
+        "date": "Date",
+        "status": "Status"
+      },
+      "statuses": {
+        "pending": "Pending",
+        "approved": "Approved",
+        "fulfilled": "Fulfilled",
+        "rejected": "Rejected"
+      }
     }
   }
 }
