@@ -1,6 +1,7 @@
 "use client";
 
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useAuth } from "@/context/AuthContext";
 import { getLanguage, languages } from "@/i18n/languages";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
@@ -17,6 +18,7 @@ export default function UserDropdown() {
   const locale = useLocale() as Locale;
   const router = useRouter();
   const pathname = usePathname();
+  const { logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isSubDropdownOpen, setIsSubDropdownOpen] = useState(false);
   const subDropdownRef = useRef<HTMLLIElement>(null);
@@ -245,12 +247,16 @@ export default function UserDropdown() {
             )}
           </li>
         </ul>
-        <Link
-          href="/signin"
+        <button
+          type="button"
+          onClick={() => {
+            logout();
+            router.replace("/signin");
+          }}
           className="group mt-3 flex items-center justify-center gap-3 rounded-lg border border-gray-200 px-3 py-2 text-theme-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-800 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
         >
           {t("signOut")}
-        </Link>
+        </button>
       </Dropdown>
     </div>
   );

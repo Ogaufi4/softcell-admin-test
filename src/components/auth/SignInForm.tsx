@@ -3,14 +3,31 @@
 import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
+import { AUTH_CREDENTIALS, useAuth } from "@/context/AuthContext";
 import Button from "@/components/ui/button/Button";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import { useState } from "react";
 
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const { login } = useAuth();
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const ok = login(email, password);
+    if (ok) {
+      router.replace("/");
+    } else {
+      setError("Invalid email or password. Use the demo credentials below.");
+    }
+  };
 
   return (
     <div className="flex w-full flex-1 flex-col lg:w-1/2">
@@ -86,13 +103,18 @@ export default function SignInForm() {
                 </span>
               </div>
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="space-y-6">
                 <div>
                   <Label>
                     Email <span className="text-error-500">*</span>{" "}
                   </Label>
-                  <Input placeholder="info@gmail.com" />
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="admin@softcell.com"
+                  />
                 </div>
                 <div>
                   <Label>
@@ -101,6 +123,8 @@ export default function SignInForm() {
                   <div className="relative">
                     <Input
                       type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
                     />
                     <span
@@ -115,6 +139,11 @@ export default function SignInForm() {
                     </span>
                   </div>
                 </div>
+                {error && (
+                  <p className="text-theme-sm font-medium text-error-500">
+                    {error}
+                  </p>
+                )}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Checkbox checked={isChecked} onChange={setIsChecked} />
@@ -122,18 +151,22 @@ export default function SignInForm() {
                       Keep me logged in
                     </span>
                   </div>
-                  <Link
-                    href="/reset-password"
-                    className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400"
-                  >
-                    Forgot password?
-                  </Link>
                 </div>
                 <div>
                   <Button className="w-full" size="sm">
                     Sign in
                   </Button>
                 </div>
+                <p className="rounded-lg bg-blue-light-50 px-4 py-3 text-theme-sm text-gray-500 dark:bg-white/5 dark:text-gray-400">
+                  Demo credentials:{" "}
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    admin@softcell.com
+                  </span>{" "}
+                  /{" "}
+                  <span className="font-semibold text-gray-700 dark:text-gray-300">
+                    adminpass
+                  </span>
+                </p>
               </div>
             </form>
 
