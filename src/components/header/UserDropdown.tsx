@@ -62,7 +62,7 @@ export default function UserDropdown() {
           />
         </span>
 
-        <span className="me-1 block text-theme-sm font-medium">Musharof</span>
+        <span className="me-1 block text-theme-sm font-medium">Mosako</span>
 
         <ChevronDownIcon
           className={`size-5 text-gray-500 transition-transform duration-200 dark:text-gray-400 ${
@@ -78,10 +78,10 @@ export default function UserDropdown() {
       >
         <div>
           <span className="block text-theme-sm font-medium text-gray-700 dark:text-gray-400">
-            Musharof Chowdhury
+            Mosako Moggara
           </span>
           <span className="mt-0.5 block text-theme-xs text-gray-500 dark:text-gray-400">
-            randomuser@pimjo.com
+            admin@softcell.com
           </span>
         </div>
 
