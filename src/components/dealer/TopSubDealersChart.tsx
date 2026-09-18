@@ -17,7 +17,7 @@ export default function TopSubDealersChart() {
     .reverse();
 
   const options: ApexOptions = {
-    colors: ["#465fff"],
+    colors: ["#fb6514"],
     chart: {
       fontFamily: "Outfit, sans-serif",
       type: "bar",

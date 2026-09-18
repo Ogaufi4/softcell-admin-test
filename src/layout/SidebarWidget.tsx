@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function SidebarWidget() {
   const t = useTranslations("sidebar.widget");
@@ -7,7 +8,7 @@ export default function SidebarWidget() {
     <div className="pb-20">
       <div
         className="
-        mx-auto  rounded-2xl bg-gray-50 px-4 py-5 text-center dark:bg-white/3"
+        mx-auto  rounded-2xl bg-orange-50 px-4 py-5 text-center dark:bg-orange-500/10"
       >
         <h3 className="mb-2 font-semibold text-gray-900 dark:text-white">
           {t("title")}
@@ -15,14 +16,12 @@ export default function SidebarWidget() {
         <p className="mb-4 text-gray-500 text-theme-sm dark:text-gray-400">
           {t("description")}
         </p>
-        <a
-          href="https://tailadmin.com/pricing"
-          target="_blank"
-          rel="nofollow"
+        <Link
+          href="/reports"
           className="flex items-center justify-center p-3 font-medium text-white rounded-lg bg-brand-500 text-theme-sm hover:bg-brand-600"
         >
           {t("purchasePlan")}
-        </a>
+        </Link>
       </div>
     </div>
   );

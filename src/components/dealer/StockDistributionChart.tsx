@@ -35,7 +35,7 @@ export default function StockDistributionChart() {
       position: "top",
       horizontalAlign: "left",
     },
-    colors: ["#465fff", "#22c55e"],
+    colors: ["#fb6514", "#22c55e"],
     chart: {
       fontFamily: "Outfit, sans-serif",
       type: "bar",
