@@ -76,6 +76,42 @@ export interface MonthlyDistribution {
   restocked: number;
 }
 
+export type TraceAction =
+  | "login"
+  | "logout"
+  | "allocation"
+  | "dispatch"
+  | "receive"
+  | "sale"
+  | "return"
+  | "approval"
+  | "rejection";
+
+export interface TraceEvent {
+  id: string;
+  timestamp: string;
+  actor: string;
+  role: "dealer" | "subDealer";
+  subDealer: string;
+  action: TraceAction;
+  product: string;
+  units: number;
+  reference: string;
+  channel: "web" | "mobile" | "ussd";
+  session: string;
+}
+
+export interface TraceTreeBranch {
+  id: string;
+  reference: string;
+  product: string;
+  units: number;
+  allocatedAt: string;
+  subDealer: string;
+  status: "inTransit" | "received" | "partiallySold" | "soldOut";
+  events: TraceEvent[];
+}
+
 export const subDealers: SubDealer[] = [
   {
     id: "sd-001",
@@ -472,3 +508,362 @@ export const monthlyDistribution: MonthlyDistribution[] = [
   { month: "aug", distributed: 13800, restocked: 12500 },
   { month: "sep", distributed: 12100, restocked: 11600 },
 ];
+
+export const traceBranches: TraceTreeBranch[] = [
+  {
+    id: "tb-001",
+    reference: "DSP-2026-0841",
+    product: "Smega Airtime",
+    units: 1500,
+    allocatedAt: "2026-09-14 08:42",
+    subDealer: "Bright Retail & Co",
+    status: "partiallySold",
+    events: [
+      {
+        id: "ev-011",
+        timestamp: "2026-09-14 09:02",
+        actor: "Rahul Sharma",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "login",
+        product: "Smega Airtime",
+        units: 0,
+        reference: "DSP-2026-0841",
+        channel: "web",
+        session: "sess-4f81c2",
+      },
+      {
+        id: "ev-012",
+        timestamp: "2026-09-14 09:05",
+        actor: "Rahul Sharma",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "receive",
+        product: "Smega Airtime",
+        units: 1500,
+        reference: "DSP-2026-0841",
+        channel: "web",
+        session: "sess-4f81c2",
+      },
+      {
+        id: "ev-013",
+        timestamp: "2026-09-14 09:11",
+        actor: "Neo Kgosi",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "login",
+        product: "Smega Airtime",
+        units: 0,
+        reference: "DSP-2026-0841",
+        channel: "mobile",
+        session: "sess-19a3bd",
+      },
+      {
+        id: "ev-014",
+        timestamp: "2026-09-14 10:20",
+        actor: "Neo Kgosi",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "sale",
+        product: "Smega Airtime",
+        units: 850,
+        reference: "DSP-2026-0841",
+        channel: "mobile",
+        session: "sess-19a3bd",
+      },
+      {
+        id: "ev-015",
+        timestamp: "2026-09-15 08:15",
+        actor: "Rahul Sharma",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "login",
+        product: "Smega Airtime",
+        units: 0,
+        reference: "DSP-2026-0841",
+        channel: "web",
+        session: "sess-77cae0",
+      },
+      {
+        id: "ev-016",
+        timestamp: "2026-09-15 08:22",
+        actor: "Rahul Sharma",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "sale",
+        product: "Smega Airtime",
+        units: 210,
+        reference: "DSP-2026-0841",
+        channel: "web",
+        session: "sess-77cae0",
+      },
+      {
+        id: "ev-017",
+        timestamp: "2026-09-15 09:40",
+        actor: "Neo Kgosi",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "login",
+        product: "Smega Airtime",
+        units: 0,
+        reference: "DSP-2026-0841",
+        channel: "ussd",
+        session: "sess-2bd01e",
+      },
+      {
+        id: "ev-018",
+        timestamp: "2026-09-15 10:05",
+        actor: "Neo Kgosi",
+        role: "subDealer",
+        subDealer: "Bright Retail & Co",
+        action: "sale",
+        product: "Smega Airtime",
+        units: 120,
+        reference: "DSP-2026-0841",
+        channel: "ussd",
+        session: "sess-2bd01e",
+      },
+    ],
+  },
+  {
+    id: "tb-002",
+    reference: "DSP-2026-0838",
+    product: "Orange Airtime",
+    units: 900,
+    allocatedAt: "2026-09-13 14:20",
+    subDealer: "Metro Telecom Hub",
+    status: "soldOut",
+    events: [
+      {
+        id: "ev-021",
+        timestamp: "2026-09-13 14:35",
+        actor: "Lerato Moalosi",
+        role: "subDealer",
+        subDealer: "Metro Telecom Hub",
+        action: "login",
+        product: "Orange Airtime",
+        units: 0,
+        reference: "DSP-2026-0838",
+        channel: "web",
+        session: "sess-31d8e2",
+      },
+      {
+        id: "ev-022",
+        timestamp: "2026-09-13 14:38",
+        actor: "Lerato Moalosi",
+        role: "subDealer",
+        subDealer: "Metro Telecom Hub",
+        action: "receive",
+        product: "Orange Airtime",
+        units: 900,
+        reference: "DSP-2026-0838",
+        channel: "web",
+        session: "sess-31d8e2",
+      },
+      {
+        id: "ev-023",
+        timestamp: "2026-09-13 16:02",
+        actor: "Lerato Moalosi",
+        role: "subDealer",
+        subDealer: "Metro Telecom Hub",
+        action: "sale",
+        product: "Orange Airtime",
+        units: 900,
+        reference: "DSP-2026-0838",
+        channel: "web",
+        session: "sess-31d8e2",
+      },
+    ],
+  },
+  {
+    id: "tb-003",
+    reference: "DSP-2026-0831",
+    product: "MyZaka Wallet",
+    units: 4200,
+    allocatedAt: "2026-09-11 10:05",
+    subDealer: "Quick Mobile Point",
+    status: "inTransit",
+    events: [
+      {
+        id: "ev-031",
+        timestamp: "2026-09-11 10:12",
+        actor: "Katlego Dube",
+        role: "subDealer",
+        subDealer: "Quick Mobile Point",
+        action: "login",
+        product: "MyZaka Wallet",
+        units: 0,
+        reference: "DSP-2026-0831",
+        channel: "mobile",
+        session: "sess-8ab3f1",
+      },
+    ],
+  },
+  {
+    id: "tb-004",
+    reference: "DSP-2026-0829",
+    product: "BTC Airtime (Motlhakase)",
+    units: 600,
+    allocatedAt: "2026-09-10 09:30",
+    subDealer: "South City Network",
+    status: "received",
+    events: [
+      {
+        id: "ev-041",
+        timestamp: "2026-09-10 09:44",
+        actor: "Palesa Chibele",
+        role: "subDealer",
+        subDealer: "South City Network",
+        action: "login",
+        product: "BTC Airtime (Motlhakase)",
+        units: 0,
+        reference: "DSP-2026-0829",
+        channel: "web",
+        session: "sess-04ee17",
+      },
+      {
+        id: "ev-042",
+        timestamp: "2026-09-10 09:47",
+        actor: "Palesa Chibele",
+        role: "subDealer",
+        subDealer: "South City Network",
+        action: "receive",
+        product: "BTC Airtime (Motlhakase)",
+        units: 600,
+        reference: "DSP-2026-0829",
+        channel: "web",
+        session: "sess-04ee17",
+      },
+      {
+        id: "ev-043",
+        timestamp: "2026-09-10 11:03",
+        actor: "Bame Kele",
+        role: "subDealer",
+        subDealer: "South City Network",
+        action: "login",
+        product: "BTC Airtime (Motlhakase)",
+        units: 0,
+        reference: "DSP-2026-0829",
+        channel: "ussd",
+        session: "sess-17f9aa",
+      },
+    ],
+  },
+  {
+    id: "tb-005",
+    reference: "DSP-2026-0824",
+    product: "Prange Money",
+    units: 300,
+    allocatedAt: "2026-09-09 11:15",
+    subDealer: "Eastern Digital Store",
+    status: "soldOut",
+    events: [
+      {
+        id: "ev-051",
+        timestamp: "2026-09-09 11:26",
+        actor: "Goabaone Ramogapi",
+        role: "subDealer",
+        subDealer: "Eastern Digital Store",
+        action: "login",
+        product: "Prange Money",
+        units: 0,
+        reference: "DSP-2026-0824",
+        channel: "mobile",
+        session: "sess-55c02b",
+      },
+      {
+        id: "ev-052",
+        timestamp: "2026-09-09 11:28",
+        actor: "Goabaone Ramogapi",
+        role: "subDealer",
+        subDealer: "Eastern Digital Store",
+        action: "receive",
+        product: "Prange Money",
+        units: 300,
+        reference: "DSP-2026-0824",
+        channel: "mobile",
+        session: "sess-55c02b",
+      },
+      {
+        id: "ev-053",
+        timestamp: "2026-09-09 13:41",
+        actor: "Goabaone Ramogapi",
+        role: "subDealer",
+        subDealer: "Eastern Digital Store",
+        action: "sale",
+        product: "Prange Money",
+        units: 300,
+        reference: "DSP-2026-0824",
+        channel: "mobile",
+        session: "sess-55c02b",
+      },
+    ],
+  },
+  {
+    id: "tb-006",
+    reference: "DSP-2026-0820",
+    product: "CashPlus",
+    units: 1800,
+    allocatedAt: "2026-09-08 13:50",
+    subDealer: "Central Comms Ltd",
+    status: "partiallySold",
+    events: [
+      {
+        id: "ev-061",
+        timestamp: "2026-09-08 14:02",
+        actor: "Tumelo Seth",
+        role: "subDealer",
+        subDealer: "Central Comms Ltd",
+        action: "login",
+        product: "CashPlus",
+        units: 0,
+        reference: "DSP-2026-0820",
+        channel: "web",
+        session: "sess-f044a8",
+      },
+      {
+        id: "ev-062",
+        timestamp: "2026-09-08 14:05",
+        actor: "Tumelo Seth",
+        role: "subDealer",
+        subDealer: "Central Comms Ltd",
+        action: "receive",
+        product: "CashPlus",
+        units: 1800,
+        reference: "DSP-2026-0820",
+        channel: "web",
+        session: "sess-f044a8",
+      },
+      {
+        id: "ev-063",
+        timestamp: "2026-09-09 08:30",
+        actor: "Oreeditse Kgosana",
+        role: "subDealer",
+        subDealer: "Central Comms Ltd",
+        action: "login",
+        product: "CashPlus",
+        units: 0,
+        reference: "DSP-2026-0820",
+        channel: "mobile",
+        session: "sess-ca19d4",
+      },
+      {
+        id: "ev-064",
+        timestamp: "2026-09-09 09:10",
+        actor: "Oreeditse Kgosana",
+        role: "subDealer",
+        subDealer: "Central Comms Ltd",
+        action: "sale",
+        product: "CashPlus",
+        units: 1150,
+        reference: "DSP-2026-0820",
+        channel: "mobile",
+        session: "sess-ca19d4",
+      },
+    ],
+  },
+];
+
+export const dealerEvents: TraceEvent[] = traceBranches.flatMap((branch) =>
+  branch.events.map((ev) => ({ ...ev, product: branch.product })),
+);

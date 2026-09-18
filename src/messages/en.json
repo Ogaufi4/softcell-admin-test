@@ -29,6 +29,7 @@
       "stock": "Stock",
       "reportsExports": "Reports & Exports",
       "payments": "Payments",
+      "tracing": "Stock Tracing",
       "analytics": "Analytics",
       "marketing": "Marketing",
       "crm": "CRM",
@@ -1114,6 +1115,64 @@
         "due": "Due",
         "overdue": "Overdue"
       }
+    },
+    "tracing": {
+      "title": "Stock Tracing",
+      "subtitle": "Follow every dispatch from the dealer down to individual user activity",
+      "metrics": {
+        "activeBranches": "Active Batches",
+        "uniqueUsers": "Unique Users",
+        "totalUnits": "Units Tracked",
+        "logins": "Logins"
+      },
+      "treeTitle": "Distribution Tree",
+      "treeSubtitle": "Hierarchy of dispatches, who acted and when",
+      "logTitle": "Activity Timeline",
+      "logSubtitle": "Who logged in, when, and how the transaction happened",
+      "searchPlaceholder": "Search actor, sub-dealer or reference...",
+      "filterAction": "Action",
+      "filterAll": "All Actions",
+      "actions": {
+        "login": "Logged In",
+        "logout": "Logged Out",
+        "allocation": "Allocated",
+        "dispatch": "Dispatched",
+        "receive": "Received",
+        "sale": "Sold",
+        "return": "Returned",
+        "approval": "Approved",
+        "rejection": "Rejected"
+      },
+      "channels": {
+        "web": "Web",
+        "mobile": "Mobile App",
+        "ussd": "USSD"
+      },
+      "table": {
+        "actor": "User",
+        "role": "Role",
+        "subDealer": "Sub-Dealer",
+        "action": "Action",
+        "product": "Product",
+        "units": "Units",
+        "reference": "Reference",
+        "channel": "Channel",
+        "timestamp": "When"
+      },
+      "roles": {
+        "dealer": "Dealer",
+        "subDealer": "Sub-Dealer"
+      },
+      "tree": {
+        "root": "Dealer HQ",
+        "branchStatuses": {
+          "inTransit": "In Transit",
+          "received": "Received",
+          "partiallySold": "Partially Sold",
+          "soldOut": "Sold Out"
+        }
+      },
+      "empty": "No tracing events match your filters."
     }
   }
 }

@@ -12,6 +12,7 @@ import {
   GridIcon,
   GroupIcon,
   HorizontaLDots,
+  ListIcon,
   PageIcon,
   PieChartIcon,
   PlusIcon,
@@ -55,6 +56,11 @@ const navItems: NavItem[] = [
     icon: <PageIcon />,
     key: "applications",
     path: "/applications",
+  },
+  {
+    icon: <ListIcon />,
+    key: "tracing",
+    path: "/tracing",
   },
 ];
 
