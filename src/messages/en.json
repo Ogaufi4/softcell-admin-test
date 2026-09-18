@@ -1014,8 +1014,8 @@
       }
     },
     "stock": {
-      "title": "Stock & Inventory",
-      "subtitle": "Track available, allocated and in-transit stock",
+      "title": "Airtime Stock",
+      "subtitle": "Track Orange, Mascom and BTC airtime & mobile money stock",
       "metrics": {
         "totalInHand": "Units In Hand",
         "allocated": "Allocated",
@@ -1032,11 +1032,11 @@
         "status": "Status"
       },
       "categories": {
-        "sim": "SIM Cards",
-        "handset": "Handsets",
-        "accessory": "Accessories",
-        "router": "Routers",
-        "modem": "Modems"
+        "orange": "Orange",
+        "mascom": "Mascom",
+        "btc": "BTC",
+        "prange": "Prange",
+        "cashplus": "CashPlus"
       },
       "statuses": {
         "inStock": "In Stock",
