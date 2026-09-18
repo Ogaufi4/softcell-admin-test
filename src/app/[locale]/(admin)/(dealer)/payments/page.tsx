@@ -70,7 +70,7 @@ export default function PaymentsPage() {
                     {t(`methods.${p.method}`)}
                   </TableCell>
                   <TableCell className="py-3 text-theme-sm font-medium text-gray-800 dark:text-white/90">
-                    ${p.amount.toLocaleString()}
+                    P{p.amount.toLocaleString()}
                   </TableCell>
                   <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                     {p.dueDate}

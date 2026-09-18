@@ -104,7 +104,7 @@ export default function ApplicationsTable() {
                   {app.units != null ? app.units.toLocaleString() : "-"}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  {app.amount != null ? `$${app.amount.toLocaleString()}` : "-"}
+                  {app.amount != null ? `P${app.amount.toLocaleString()}` : "-"}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                   {app.date}

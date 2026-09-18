@@ -122,7 +122,7 @@ export default function SubDealersTable() {
                   {s.stockInHand.toLocaleString()}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm font-medium text-gray-800 dark:text-white/90">
-                  ${s.outstanding.toLocaleString()}
+                  P{s.outstanding.toLocaleString()}
                 </TableCell>
                 <TableCell className="py-3">
                   <div className="flex items-center gap-2">

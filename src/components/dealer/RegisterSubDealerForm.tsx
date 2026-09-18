@@ -107,7 +107,7 @@ export default function RegisterSubDealerForm() {
           </div>
           <div>
             <Label htmlFor="creditLimit">{t("form.creditLimit")}</Label>
-            <Input id="creditLimit" type="number" min={0} placeholder="$0" />
+            <Input id="creditLimit" type="number" min={0} placeholder="P0" />
           </div>
           <div className="xl:col-span-2">
             <Label htmlFor="address">{t("form.address")}</Label>

@@ -150,7 +150,7 @@ export default function ReportsExports() {
             {t("table.totalCollected")}
           </span>
           <h4 className="mt-2 text-title-sm font-bold text-gray-800 dark:text-white/90">
-            ${summary.totalCollected.toLocaleString()}
+            P{summary.totalCollected.toLocaleString()}
           </h4>
         </div>
       </div>
@@ -203,7 +203,7 @@ export default function ReportsExports() {
                       {p.method}
                     </TableCell>
                     <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                      ${p.amount.toLocaleString()}
+                      P{p.amount.toLocaleString()}
                     </TableCell>
                     <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                       {p.dueDate}
@@ -229,7 +229,7 @@ export default function ReportsExports() {
                       {tr.units ? tr.units.toLocaleString() : "-"}
                     </TableCell>
                     <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                      ${tr.amount.toLocaleString()}
+                      P{tr.amount.toLocaleString()}
                     </TableCell>
                     <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                       {tr.date}

@@ -131,7 +131,7 @@ export default function TransactionsTable() {
                   {tr.units ? tr.units.toLocaleString() : "-"}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
-                  ${tr.amount.toLocaleString()}
+                  P{tr.amount.toLocaleString()}
                 </TableCell>
                 <TableCell className="py-3 text-theme-sm text-gray-500 dark:text-gray-400">
                   {tr.date}

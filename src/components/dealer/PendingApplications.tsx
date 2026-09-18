@@ -78,7 +78,7 @@ export default function PendingApplications() {
                   {app.type === "stock" && app.units != null
                     ? `${app.units.toLocaleString()} units`
                     : app.amount != null
-                      ? `$${app.amount.toLocaleString()}`
+                      ? `P${app.amount.toLocaleString()}`
                       : "-"}
                 </span>
                 <button
