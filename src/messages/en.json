@@ -1231,6 +1231,8 @@
     "brand": "SoftCell Sub-Dealer Portal",
     "signOut": "Sign out",
     "nav": {
+      "menu": "Menu",
+      "toggle": "Toggle Sidebar",
       "overview": "Overview",
       "virtualStock": "Virtual Stock",
       "restock": "Restock"
